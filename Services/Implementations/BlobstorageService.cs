@@ -4,21 +4,22 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
+using Azure.Identity;
+using Services.Abstractions;
 
 namespace Services.Implementations;
 
-public class BlobstorageService : IBlobstorageService
+public class BlobStorageService : IBlobStorageService
 {
     private readonly string _connectionString;
     private readonly string _containerName;
     private readonly BlobServiceClient _blobServiceClient;
     private readonly BlobContainerClient _blobContainerClient;
-
-    public BlobstorageService(IConfiguration configuration)
+    
+    public BlobStorageService(IConfiguration configuration)
     {
-        _connectionString = configuration["AzureBlobStorage:ConnectionString"];
         _containerName = configuration["AzureBlobStorage:ContainerName"];
-        _blobServiceClient = new BlobServiceClient(_connectionString);
+        _blobServiceClient = new BlobServiceClient(new Uri(configuration["AzureBlobStorage:BlobServiceUri"]), new DefaultAzureCredential());
         _blobContainerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
     }
 

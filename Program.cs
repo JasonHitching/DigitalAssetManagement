@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream:Program.cs
-using DigitalAssetManager.Components;
-=======
 using Services.Implementations;
 using Services.Abstractions;
->>>>>>> Stashed changes:DigitalAssetManager/Program.cs
+using DigitalAssetManager.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -12,13 +9,12 @@ configuration.AddJsonFile("appsettings.Development.json", optional: true, reload
 configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 // Add services to the container.
-<<<<<<< Updated upstream:Program.cs
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
-=======
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IBlobStorageService, BlobStorageService>();
->>>>>>> Stashed changes:DigitalAssetManager/Program.cs
+
+// Add interactive server components
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
