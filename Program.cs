@@ -10,7 +10,7 @@ configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: tr
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<IBlobStorageService, BlobStorageService>();
+builder.Services.AddSingleton<IBlobStorageService>(provider => BlobStorageServiceFactory.Create(configuration));
 
 // Add interactive server components
 builder.Services.AddRazorComponents()
