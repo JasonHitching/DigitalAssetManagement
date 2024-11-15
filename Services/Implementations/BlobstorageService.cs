@@ -39,14 +39,17 @@ public class BlobStorageService : IBlobStorageService
     }
 }
 
+/// <summary>
+/// Factory class to create an instance of <see cref="BlobStorageService"/>.
+/// </summary>
 public static class BlobStorageServiceFactory
 {
     /// <summary>
-    /// 
+    /// Factory method to create an instance of <see cref="BlobStorageService"/>.
     /// </summary>
-    /// <param name="configuration"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <param name="configuration">Injected configuration properties</param>
+    /// <returns>Blob storage service object</returns>
+    /// <exception cref="ArgumentNullException">Thrown if configuration properties are missing</exception>
     public static BlobStorageService Create(IConfiguration configuration)
     {
         var containerName = configuration["AzureBlobStorage:ContainerName"] ?? throw new ArgumentNullException("AzureBlobStorage:ContainerName");
