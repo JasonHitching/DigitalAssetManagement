@@ -55,7 +55,8 @@ public static class BlobStorageServiceFactory
         var containerName = configuration["AzureBlobStorage:ContainerName"] ?? throw new ArgumentNullException("AzureBlobStorage:ContainerName");
         var blobServiceUri = configuration["AzureBlobStorage:BlobServiceUri"] ?? throw new ArgumentNullException("AzureBlobStorage:BlobServiceUri");
 
-        var blobServiceClient = new BlobServiceClient(new Uri(blobServiceUri), new DefaultAzureCredential());
+        var credential = new AzureCliCredential();
+        var blobServiceClient = new BlobServiceClient(new Uri(blobServiceUri), credential);
         var blobContainerClient = blobServiceClient.GetBlobContainerClient(containerName);
 
         return new BlobStorageService(containerName, blobServiceClient, blobContainerClient);

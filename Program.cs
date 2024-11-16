@@ -27,14 +27,17 @@ internal class Program
         var blobStorageService = app.Services.GetRequiredService<IBlobStorageService>();
 
         // Path to the image file to upload (TESTING ONLY)
-        var filePath = configuration["downloadsImagePath"]; ;
+        var filePath = configuration["LocalDirectories:DownloadsImagePath"]; ;
         var fileName = Path.GetFileName(filePath);
 
         // Upload the image (TESTING ONLY)
-        using (var fileStream = File.OpenRead(filePath))
+        if (filePath != null && File.Exists(filePath))
         {
-            var uri = await blobStorageService.UploadImageAsync(fileName, fileStream);
-            Console.WriteLine($"Image uploaded to: {uri}");
+            using (var fileStream = File.OpenRead(filePath))
+            {
+                var uri = await blobStorageService.UploadImageAsync(fileName!, fileStream);
+                Console.WriteLine($"Image uploaded to: {uri}");
+            }
         }
 
         // Configure the HTTP request pipeline.
