@@ -234,6 +234,10 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
+[appsettings.Development.json](http://_vscodecontentref_/4)
+
+
+
 # SQL Server files
 *.mdf
 *.ldf

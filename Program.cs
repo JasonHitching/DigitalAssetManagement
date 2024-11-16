@@ -27,7 +27,7 @@ internal class Program
         var blobStorageService = app.Services.GetRequiredService<IBlobStorageService>();
 
         // Path to the image file to upload (TESTING ONLY)
-        var filePath = "";
+        var filePath = configuration["downloadsImagePath"]; ;
         var fileName = Path.GetFileName(filePath);
 
         // Upload the image (TESTING ONLY)
